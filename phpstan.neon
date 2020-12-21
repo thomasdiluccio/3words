@@ -1,0 +1,29 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+
+    level: max
+    inferPrivatePropertyTypeFromConstructor: true
+    # polluteScopeWithLoopInitialAssignments: false
+    checkAlwaysTrueCheckTypeFunctionCall: true
+    checkAlwaysTrueInstanceof: true
+    checkAlwaysTrueStrictComparison: true
+    checkFunctionNameCase: true
+    checkMissingIterableValueType: true
+
+    ignoreErrors:
+        # - '#Unsafe usage of new static#'
+
+    excludes_analyse:
+    - vendor/*
+    - bootstrap/*
+    - config/*
+    - database/*
+    - node_modules/*
+    - resources
+    - storage
+
+    # checkMissingIterableValueType: false
