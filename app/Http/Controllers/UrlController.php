@@ -12,15 +12,8 @@ class UrlController extends Controller
      */
     public function suggest(Request $request, UrlManager $urlManager): array
     {
-        $url = (string) $request->input('url') ?? 'https://www.academia.edu/42919640/Towards_digital_sobriety_report_by_The_Shift_Project_';
+        $url = (string) $request->input('url');
 
-        $content = $urlManager->extract($url);
-        $language = $urlManager->detectLanguageCode($content);
-
-        return [
-            'url' => $url,
-            'language' => $language,
-            'suggestions' => $urlManager->getSuggestedTriads($url),
-        ];
+        return $urlManager->getSuggestionData($url);
     }
 }

@@ -25,17 +25,28 @@ class UrlManager
     }
 
     /**
-     * @return array<int, string>
+     * @return array{url: string, language: string, suggestions: array<int, string>}
      */
-    public function getSuggestedTriads(string $url): array
+    public function getSuggestionData(string $url): array
     {
         $this->validateUrl($url);
 
         $content = $this->extract($url);
-
         $languageCode = $this->detectLanguageCode($content);
         $locale = $this->getLocale($languageCode);
 
+        return [
+            'url' => $url,
+            'language' => $languageCode,
+            'suggestions' => $this->getSuggestedTriads($content, $locale),
+        ];
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function getSuggestedTriads(string $content, string $locale): array
+    {
         $rake = RakePlus::create($content, $locale, 3);
         $phrasesScores = $rake->sortByScore('desc')->scores();
 
@@ -63,7 +74,7 @@ class UrlManager
         return $triads;
     }
 
-    public function detectLanguageCode(string $content): string
+    private function detectLanguageCode(string $content): string
     {
         $detection = $this->language
             ->detect($content)
@@ -76,7 +87,7 @@ class UrlManager
     /**
      * Crawl the URL and extract content data
      */
-    public function extract(string $url): string
+    private function extract(string $url): string
     {
         $data = [];
 
