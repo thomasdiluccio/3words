@@ -10,11 +10,14 @@
     "require": {
         "php": "^7.3|^8.0",
         "blackfire/php-sdk": "^1.23",
+        "donatello-za/rake-php-plus": "^1.0",
+        "fabpot/goutte": "^4.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "patrickschur/language-detection": "^5.0",
         "sentry/sdk": "^3.1"
     },
     "require-dev": {
